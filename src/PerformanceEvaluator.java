@@ -64,10 +64,13 @@ public class PerformanceEvaluator {
             index++;
         }
 
-        performanceData = Arrays.copyOf(performanceData, performanceData.length + 1);
-        performanceData[5] = new String[]{"Best Algorithm", bestAlgorithm};
+        performanceData = Arrays.copyOf(performanceData, performanceData.length + 2);
+        performanceData[5] = new String[]{"", ""};
+        performanceData[6] = new String[]{"Best Algorithm", bestAlgorithm};
 
         JTable resultTable = new JTable(performanceData, columnNames);
+
+
         JScrollPane scrollPane = new JScrollPane(resultTable);
         scrollPane.setPreferredSize(new Dimension(400, 200));
         JOptionPane.showMessageDialog(null, scrollPane, "Performance Results", JOptionPane.INFORMATION_MESSAGE);
