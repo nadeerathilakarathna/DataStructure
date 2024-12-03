@@ -14,8 +14,23 @@ public class PerformanceEvaluator {
 
         int rowCount = tableModel.getRowCount();
         String[] data = new String[rowCount];
+
+        // Validate if the column is numerical
         for (int i = 0; i < rowCount; i++) {
-            data[i] = (String) tableModel.getValueAt(i, selectedColumn);
+            Object cellValue = tableModel.getValueAt(i, selectedColumn);
+            if (!(cellValue instanceof String)) {
+                JOptionPane.showMessageDialog(null, "Selected column is not numerical!", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            try {
+                Double.parseDouble((String) cellValue);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Selected column is not numerical!", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            data[i] = (String) cellValue;
         }
 
         String[][] performanceData = new String[5][2];
